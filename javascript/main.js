@@ -10,7 +10,6 @@ function getData() {
 }
 
 function addSongs(ajaxData) {
-    console.log(ajaxData[3].icon_url);
     var badges = ajaxData.slice(0, 10);
     badges.forEach(function(url, index) {
         $("#root").append(`
