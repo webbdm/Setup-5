@@ -1,8 +1,7 @@
 function getData() {
-    $.ajax({url: "https://teamtreehouse.com/geoffwebb.json"}).done(function(data) {
-        var ajaxData = data.badges[3].icon_url;
-        console.log(ajaxData);
-        addSongs();
+    $.ajax({ url: "https://teamtreehouse.com/geoffwebb.json" }).done(function(data) {
+        var ajaxData = data.badges;
+        addSongs(ajaxData);
     }).fail(function(error) {
         console.log("Failed", error);
     }).always(function() {
@@ -10,11 +9,18 @@ function getData() {
     });
 }
 
-function addSongs() {
-	console.log("test");
-    // data.map(function(song, index) {
-    //     $("#root").html(`<p>Test</p>`);
-    // });
+function addSongs(ajaxData) {
+    console.log(ajaxData[3].icon_url);
+    var badges = ajaxData.slice(0, 10);
+    badges.forEach(function(url, index) {
+        $("#root").append(`
+        	<div class="col-md-3">
+	        	<div class="thumbnail">
+	        		<img class="image" src=${ajaxData[index].icon_url} alt="icon" style="height:100px; width:100px;">
+	        	</div>
+        	</div>`);
+
+    });
 }
 
 getData();
